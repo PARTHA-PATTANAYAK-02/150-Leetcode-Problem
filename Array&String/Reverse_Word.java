@@ -4,37 +4,45 @@ public class Reverse_Word {
     public static String reverseWords(String str) {
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder(); // give us final output
-        int count = 0;
-        // convert to array
-        char ch[] = str.trim().toCharArray();
-        // reverse the array
-        for (int i = 0; i < ch.length / 2; i++) {
-            int last = ch.length - 1 - i;
-            char temp = ch[i];
-            ch[i] = ch[last];
-            ch[last] = temp;
-        }
-        for (int i = 0; i < ch.length; i++) {
-            if (ch[i] != ' ') {
-                sb1.append(ch[i]);
-                count = 0; // reset count 0 for next word
+        boolean flag = true;
+        str = str.trim();
+        for (int i = str.length() - 1; i >= 0; i--) {
+            if (str.charAt(i) != ' ') {
+                sb1.append(str.charAt(i));
+                flag = true; 
             } else {
-                count++; // count the space
-                if (count == 1) { // work only space count 1
+                if (flag) {
+                    flag = false;
                     sb1.reverse();
                     sb2.append(sb1);
                     sb2.append(' ');
                     sb1.setLength(0);
                 }
             }
-            if (i == ch.length - 1) {
+            if (i == 0) {
                 sb1.reverse();
                 sb2.append(sb1);
             }
         }
         return sb2.toString();
     }
+    // Another Method
+    
+    
+    // public static String reverseWords(String str) {
+    //     // Trim leading/trailing spaces and split the string by spaces
+    //     String[] words = str.trim().split("\\s+"); // \\s+ ensures handling multiple spaces
+    //     StringBuilder sb = new StringBuilder();
 
+    //     // Append words in reverse order
+    //     for (int i = words.length - 1; i >= 0; i--) {
+    //         sb.append(words[i]);
+    //         if (i > 0) {
+    //             sb.append(" "); // Add space between words, but not after the last word
+    //         }
+    //     }
+    //     return sb.toString();
+    // }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter A String  : ");
